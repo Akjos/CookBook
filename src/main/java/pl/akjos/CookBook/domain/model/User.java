@@ -30,4 +30,7 @@ public class User {
     @Column
     private Boolean enable;
 
+    @ManyToOne
+    private Role role;
+
 }
