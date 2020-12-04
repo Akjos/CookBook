@@ -33,4 +33,62 @@ public class User {
     @ManyToOne
     private Role role;
 
+    public static UserBuilder builder() {
+        return new UserBuilder();
+    }
+
+    @PrePersist
+    private void onCreate() {
+        this.enable = true;
+    }
+
+    public static class UserBuilder {
+        private Long id;
+        private String username;
+        private String password;
+        private String email;
+        private Boolean enable;
+        private Role role;
+
+        UserBuilder() {
+        }
+
+        public UserBuilder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public UserBuilder username(String username) {
+            this.username = username;
+            return this;
+        }
+
+        public UserBuilder password(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public UserBuilder email(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public UserBuilder enable(Boolean enable) {
+            this.enable = enable;
+            return this;
+        }
+
+        public UserBuilder role(Role role) {
+            this.role = role;
+            return this;
+        }
+
+        public User build() {
+            return new User(id, username, password, email, enable, role);
+        }
+
+        public String toString() {
+            return "User.UserBuilder(id=" + this.id + ", username=" + this.username + ", password=" + this.password + ", email=" + this.email + ", enable=" + this.enable + ", role=" + this.role + ")";
+        }
+    }
 }
