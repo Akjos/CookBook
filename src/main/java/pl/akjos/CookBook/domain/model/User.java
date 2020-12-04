@@ -24,8 +24,8 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column
-    private Boolean admin;
+    @Column(nullable = false)
+    private String email;
 
     @Column
     private Boolean enable;
