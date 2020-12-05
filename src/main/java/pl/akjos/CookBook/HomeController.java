@@ -2,6 +2,7 @@ package pl.akjos.CookBook;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -26,4 +27,9 @@ public class HomeController {
         return "/contact";
     }
 
+    @GetMapping("/app/dashboard")
+    public String prepareDashboardForLoggedUser() {
+        log.debug("Go to main page loged user");
+        return "app/dashboard";
+    }
 }
