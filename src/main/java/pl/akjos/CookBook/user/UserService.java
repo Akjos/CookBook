@@ -31,4 +31,8 @@ public class UserService {
 
         log.debug("User to save in DB: {}", savedUser);
     }
+
+    public User getUserByName(String username) {
+        return userRepository.getUserByUsername(username);
+    }
 }

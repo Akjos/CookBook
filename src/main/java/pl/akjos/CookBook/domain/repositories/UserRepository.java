@@ -4,4 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import pl.akjos.CookBook.domain.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
+    User getUserByUsername(String username);
 }

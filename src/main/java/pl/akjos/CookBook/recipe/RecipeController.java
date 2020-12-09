@@ -1,5 +1,6 @@
 package pl.akjos.CookBook.recipe;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +14,11 @@ import javax.validation.Valid;
 
 @Controller
 @Slf4j
+@RequiredArgsConstructor
 @RequestMapping("/app/recipe")
 public class RecipeController {
+
+    private final RecipeService recipeService;
 
     @GetMapping("/add")
     public String prepareFormToAddRecipe(Model model) {
@@ -26,6 +30,10 @@ public class RecipeController {
     @PostMapping("/add")
     public String addRecipe(@ModelAttribute("recipe") @Valid RecipeToSaveDTO recipe, BindingResult bindingResult, Model model) {
         log.debug("Add recipe to database {}", recipe);
+        if(bindingResult.hasErrors()){
+            return "/app/recipe/add";
+        }
+        recipeService.add(recipe);
         return "redirect:/app/recipe/add";
     }
 }
