@@ -2,9 +2,11 @@ package pl.akjos.CookBook.recipe;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class RecipeToSaveDTO {
 
     private Long id;

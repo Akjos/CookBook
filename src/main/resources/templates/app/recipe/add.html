@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -10,70 +10,25 @@
           crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Charmonman:400,700|Open+Sans:400,600,700&amp;subset=latin-ext"
           rel="stylesheet">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
 
 <body>
-<header class="page-header">
-    <nav class="navbar navbar-expand-lg justify-content-between">
-        <a href="/" class="navbar-brand main-logo main-logo-smaller">
-            Zaplanuj <span>Jedzonko</span>
-        </a>
-        <div class="d-flex justify-content-around">
-            <h4 class="text-light mr-3">Imię</h4>
-            <div class="circle-div text-center"><i class="fas fa-user icon-user"></i></div>
-        </div>
-    </nav>
-</header>
+
+<!--/*/ <th:block th:include="app/fragments/fragments.html :: header"></th:block> /*/-->
 
 <section class="dashboard-section">
     <div class="row dashboard-nowrap">
-        <ul class="nav flex-column long-bg">
-            <li class="nav-item">
-                <a class="nav-link" href="/dashboard.html">
-                    <span>Pulpit</span>
-                    <i class="fas fa-angle-right"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/app-recipes.html">
-                    <span>Przepisy</span>
-                    <i class="fas fa-angle-right"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/app-schedules.html">
-                    <span>Plany</span>
-                    <i class="fas fa-angle-right"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/app-edit-user-data.html">
-                    <span>Edytuj dane</span>
-                    <i class="fas fa-angle-right"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="/app-edit-password.html">
-                    <span>Zmień hasło</span>
-                    <i class="fas fa-angle-right"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/super-admin-users.html">
-                    <span>Użytkownicy</span>
-                    <i class="fas fa-angle-right"></i>
-                </a>
-            </li>
-        </ul>
+
+        <!--/*/ <th:block th:include="app/fragments/fragments.html :: side-menu"></th:block> /*/-->
 
         <div class="m-4 p-3 width-medium text-color-darker">
             <div class="dashboard-content border-dashed p-3 m-4 view-height">
-                <!-- fix action, method -->
-                <!-- add name attribute for all inputs -->
-                <form>
+
+
+                <form th:action="@{/app/recipe/add}" th:object="${recipe}" th:method="post">
                     <div class="mt-4 ml-4 mr-4">
                         <div class="row border-bottom border-3">
                             <div class="col"><h3 class="color-header text-uppercase">Nowy przepis</h3></div>
@@ -88,17 +43,17 @@
                                 <th scope="row" class="col-2">Nazwa Przepisu</th>
                                 <td class="col-7">
 
-                                    <input name="name" class="w-100 p-1" value="">
+                                    <input th:field="*{name}" class="w-100 p-1" value="">
                                 </td>
                             </tr>
                             <tr class="d-flex">
                                 <th scope="row" class="col-2">Opis przepisu</th>
-                                <td class="col-7"><textarea class="w-100 p-1" rows="5"></textarea></td>
+                                <td class="col-7"><textarea th:field="*{description}" class="w-100 p-1" rows="5"></textarea></td>
                             </tr>
                             <tr class="d-flex">
                                 <th scope="row" class="col-2">Przygotowanie (minuty)</th>
                                 <td class="col-3">
-                                    <input class="p-1" type="number" value="">
+                                    <input th:field="*{preparationTime}" class="p-1" type="number" value="">
                                 </td>
                             </tr>
                             </tbody>
@@ -112,12 +67,12 @@
                         </div>
                         <div class="row d-flex">
                             <div class="col-5 p-4">
-                                <textarea class="w-100 p-1" rows="10"></textarea>
+                                <textarea th:field="*{preparation}" class="w-100 p-1" rows="10"></textarea>
                             </div>
                             <div class="col-2"></div>
 
                             <div class="col-5 p-4">
-                                <textarea class="w-100 p-1" rows="10"></textarea>
+                                <textarea th:field="*{ingredients}" class="w-100 p-1" rows="10"></textarea>
                             </div>
                         </div>
                     </div>
