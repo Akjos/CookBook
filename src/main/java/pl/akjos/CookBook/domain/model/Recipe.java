@@ -33,8 +33,8 @@ public class Recipe {
     @Column
     private LocalDate update;
 
-    @Column(nullable = false)
-    private Integer preparation_time;
+    @Column(name = "preparation_time", nullable = false)
+    private Integer preparationTime;
 
     @Column(length = 700, nullable = false)
     private String preparation;
