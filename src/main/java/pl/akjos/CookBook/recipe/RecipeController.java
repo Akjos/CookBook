@@ -20,6 +20,12 @@ public class RecipeController {
 
     private final RecipeService recipeService;
 
+    @GetMapping
+    public String showMainRecipePage(Model model) {
+
+        return "app/recipe/list";
+    }
+
     @GetMapping("/add")
     public String prepareFormToAddRecipe(Model model) {
         log.debug("Go to add recipe page");
@@ -34,6 +40,6 @@ public class RecipeController {
             return "/app/recipe/add";
         }
         recipeService.add(recipe);
-        return "redirect:/app/recipe/add";
+        return "redirect:/app/recipe";
     }
 }
