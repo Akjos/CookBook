@@ -6,5 +6,7 @@ public interface RecipeService {
 
     void add(RecipeToSaveDTO recipeToSaveDTO);
 
-    List<RecipeListDTO> getAll();
+    List<RecipeListDTO> getAll(Integer page);
+
+    Integer getNumberPages();
 }

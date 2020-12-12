@@ -5,13 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @Slf4j
@@ -21,10 +19,18 @@ public class RecipeController {
 
     private final RecipeService recipeService;
 
-    @GetMapping
-    public String showMainRecipePage(Model model) {
-        List<RecipeListDTO> recipesDTO = recipeService.getAll();
+    @GetMapping(value = {"", "/{page}"})
+    public String showMainRecipePage(@PathVariable(name = "page") Optional<Integer> pageVariable, Model model) {
+        log.debug("Go to page list, page nr {}", pageVariable);
+        Integer page = pageVariable.orElse(0);
+        Integer maxPagesNum = recipeService.getNumberPages();
+        if(page > maxPagesNum) {
+            page = maxPagesNum;
+        }
+        List<RecipeListDTO> recipesDTO = recipeService.getAll(page);
         model.addAttribute("recipesList", recipesDTO);
+        model.addAttribute("page", page);
+        model.addAttribute("maxPages", maxPagesNum);
         return "app/recipe/list";
     }
 
