@@ -9,6 +9,8 @@ import pl.akjos.CookBook.domain.repositories.RecipeRepository;
 import pl.akjos.CookBook.user.UserService;
 import pl.akjos.CookBook.utils.SecurityUtils;
 
+import java.util.List;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -33,5 +35,15 @@ public class RecipeServiceImpl implements RecipeService {
         log.debug("Save recipe to database {}", recipe);
 
         recipeRepository.save(recipe);
+    }
+
+    @Override
+    public List<RecipeListDTO> getAll() {
+        String username = SecurityUtils.getUsername();
+        Long userId = userService.getUserByName(username).getId();
+
+        List<RecipeListDTO> recipesDTO = recipeRepository.getRecipesByUserId(userId);
+
+        return recipesDTO;
     }
 }

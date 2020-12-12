@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -22,7 +23,8 @@ public class RecipeController {
 
     @GetMapping
     public String showMainRecipePage(Model model) {
-
+        List<RecipeListDTO> recipesDTO = recipeService.getAll();
+        model.addAttribute("recipesList", recipesDTO);
         return "app/recipe/list";
     }
 
@@ -36,7 +38,7 @@ public class RecipeController {
     @PostMapping("/add")
     public String addRecipe(@ModelAttribute("recipe") @Valid RecipeToSaveDTO recipe, BindingResult bindingResult, Model model) {
         log.debug("Add recipe to database {}", recipe);
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return "/app/recipe/add";
         }
         recipeService.add(recipe);
