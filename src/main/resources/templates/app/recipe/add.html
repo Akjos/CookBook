@@ -44,16 +44,19 @@
                                 <td class="col-7">
 
                                     <input th:field="*{name}" class="w-100 p-1" value="">
+                                    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
                                 </td>
                             </tr>
                             <tr class="d-flex">
                                 <th scope="row" class="col-2">Opis przepisu</th>
                                 <td class="col-7"><textarea th:field="*{description}" class="w-100 p-1" rows="5"></textarea></td>
+                                <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
                             </tr>
                             <tr class="d-flex">
                                 <th scope="row" class="col-2">Przygotowanie (minuty)</th>
                                 <td class="col-3">
                                     <input th:field="*{preparationTime}" class="p-1" type="number" value="">
+                                    <p th:if="${#fields.hasErrors('preparationTime')}" th:errors="*{preparationTime}"></p>
                                 </td>
                             </tr>
                             </tbody>
@@ -68,11 +71,13 @@
                         <div class="row d-flex">
                             <div class="col-5 p-4">
                                 <textarea th:field="*{preparation}" class="w-100 p-1" rows="10"></textarea>
+                                <p th:if="${#fields.hasErrors('preparation')}" th:errors="*{preparation}"></p>
                             </div>
                             <div class="col-2"></div>
 
                             <div class="col-5 p-4">
                                 <textarea th:field="*{ingredients}" class="w-100 p-1" rows="10"></textarea>
+                                <p th:if="${#fields.hasErrors('ingredients')}" th:errors="*{ingredients}"></p>
                             </div>
                         </div>
                     </div>

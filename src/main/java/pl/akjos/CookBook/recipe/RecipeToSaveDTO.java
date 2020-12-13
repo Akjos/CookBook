@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -24,6 +25,7 @@ public class RecipeToSaveDTO {
     private String description;
 
     @NotNull
+    @Min(1)
     private Integer preparationTime;
 
     @NotEmpty

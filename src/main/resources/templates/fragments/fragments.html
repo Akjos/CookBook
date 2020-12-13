@@ -10,6 +10,9 @@
             Zaplanuj <span>Jedzonko</span>
         </a>
         <ul class="nav nounderline text-uppercase">
+            <li class="nav-item ml-4" sec:authorize="isAuthenticated()">
+                <a class="nav-link color-header" href="/app/dashboard">Start</a>
+            </li>
             <li class="nav-item ml-4" sec:authorize="!isAuthenticated()">
                 <a class="nav-link color-header" href="/login">Logowanie</a>
             </li>
