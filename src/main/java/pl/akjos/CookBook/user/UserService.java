@@ -9,6 +9,9 @@ import pl.akjos.CookBook.domain.model.User;
 import pl.akjos.CookBook.domain.repositories.RoleRepository;
 import pl.akjos.CookBook.domain.repositories.UserRepository;
 
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -33,6 +36,11 @@ public class UserService {
     }
 
     public User getUserByName(String username) {
-        return userRepository.getUserByUsername(username);
+
+        Optional<User> user = userRepository.findUserByUsername(username);
+        if(!user.isPresent()) {
+            throw new NoSuchElementException("No user in the database");
+        }
+        return user.get();
     }
 }
