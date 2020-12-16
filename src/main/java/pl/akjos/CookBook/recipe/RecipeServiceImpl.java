@@ -59,6 +59,6 @@ public class RecipeServiceImpl implements RecipeService {
     public Integer getNumberPages() {
         String username = SecurityUtils.getUsername();
         Integer countRecipe = recipeRepository.countByUserId(userService.getUserByName(username).getId());
-        return (countRecipe - 1) / (SIZE);
+        return (countRecipe - 1) / SIZE;
     }
 }
