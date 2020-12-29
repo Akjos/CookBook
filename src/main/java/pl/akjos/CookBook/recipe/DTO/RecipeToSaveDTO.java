@@ -1,4 +1,4 @@
-package pl.akjos.CookBook.recipe;
+package pl.akjos.CookBook.recipe.DTO;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
