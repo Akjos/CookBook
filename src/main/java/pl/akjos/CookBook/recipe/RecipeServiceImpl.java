@@ -8,10 +8,15 @@ import org.springframework.stereotype.Service;
 import pl.akjos.CookBook.domain.model.Recipe;
 import pl.akjos.CookBook.domain.model.User;
 import pl.akjos.CookBook.domain.repositories.RecipeRepository;
+import pl.akjos.CookBook.recipe.dto.RecipeDetailsDTO;
+import pl.akjos.CookBook.recipe.dto.RecipeListDTO;
+import pl.akjos.CookBook.recipe.dto.RecipeToSaveDTO;
 import pl.akjos.CookBook.user.UserService;
 import pl.akjos.CookBook.utils.SecurityUtils;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -60,6 +65,19 @@ public class RecipeServiceImpl implements RecipeService {
         String username = SecurityUtils.getUsername();
         Integer countRecipe = recipeRepository.countByUserId(userService.getUserByName(username).getId());
         Integer page = (countRecipe - 1) / SIZE;
-        return (page>0) ? page : 0;
+        log.debug("Number recipe: {} Number page: {} for username: {}", countRecipe, page, username);
+        return (page > 0) ? page : 0;
     }
+
+    @Override
+    public RecipeDetailsDTO getRecipeByIdAndUsername(Long id, String username) {
+        log.debug("Get recipe by id: {} and username: {}", id, username);
+        Optional<RecipeDetailsDTO> recipe = recipeRepository.findRecipeByIdAndUserId(id, username);
+        if (!recipe.isPresent()) {
+            throw new NoSuchElementException("No recipe details on this id for this user");
+        }
+        return recipe.get();
+    }
+
+
 }

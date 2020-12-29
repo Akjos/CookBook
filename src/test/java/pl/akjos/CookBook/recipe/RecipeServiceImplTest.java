@@ -11,7 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import pl.akjos.CookBook.domain.model.Recipe;
 import pl.akjos.CookBook.domain.model.User;
 import pl.akjos.CookBook.domain.repositories.RecipeRepository;
-import pl.akjos.CookBook.recipe.DTO.RecipeToSaveDTO;
+import pl.akjos.CookBook.recipe.dto.RecipeToSaveDTO;
 import pl.akjos.CookBook.user.UserService;
 
 import static org.junit.Assert.*;

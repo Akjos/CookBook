@@ -6,6 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import pl.akjos.CookBook.recipe.dto.RecipeDetailsDTO;
+import pl.akjos.CookBook.recipe.dto.RecipeListDTO;
+import pl.akjos.CookBook.recipe.dto.RecipeToSaveDTO;
+import pl.akjos.CookBook.utils.SecurityUtils;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -49,5 +53,13 @@ public class RecipeController {
         }
         recipeService.add(recipe);
         return "redirect:/app/recipe";
+    }
+
+    @GetMapping("/details/{id}")
+    public String showRecipeDetails(@PathVariable("id") Long id, Model model) {
+        String username = SecurityUtils.getUsername();
+        RecipeDetailsDTO recipeDetailsDTO = recipeService.getRecipeByIdAndUsername(id, username);
+        model.addAttribute("recipe", recipeDetailsDTO);
+        return "app/recipe/details";
     }
 }
