@@ -60,6 +60,7 @@ public class RecipeController {
         String username = SecurityUtils.getUsername();
         RecipeDetailsDTO recipeDetailsDTO = recipeService.getRecipeByIdAndUsername(id, username);
         model.addAttribute("recipe", recipeDetailsDTO);
+        log.debug("Show details for recipe: {}", recipeDetailsDTO);
         return "app/recipe/details";
     }
 }
