@@ -2,7 +2,6 @@ package pl.akjos.CookBook.domain.model;
 
 
 import lombok.*;
-import org.hibernate.loader.plan.build.spi.MetamodelDrivenLoadPlanBuilder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -33,10 +32,11 @@ public class Plan {
     @ManyToOne
     private User user;
 
-    private Plan(Long id, String name, String description) {
+    private Plan(Long id, String name, String description, User user) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.user = user;
     }
 
     @PrePersist
@@ -52,6 +52,7 @@ public class Plan {
         private Long id;
         private String name;
         private String description;
+        private User user;
 
         PlanBuilder() {
         }
@@ -71,8 +72,13 @@ public class Plan {
             return this;
         }
 
+        public PlanBuilder user(User user) {
+            this.user = user;
+            return this;
+        }
+
         public Plan build() {
-            return new Plan(id, name, description);
+            return new Plan(id, name, description, user);
         }
     }
 }

@@ -1,12 +1,16 @@
 package pl.akjos.CookBook.plan.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
 
 @Data
-public class PlanToSaveDTO {
+@AllArgsConstructor
+@NoArgsConstructor
+public class PlanDTO {
 
     private Long id;
 
