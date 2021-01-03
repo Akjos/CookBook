@@ -18,7 +18,7 @@ import java.util.List;
 @Slf4j
 public class PlanServiceImpl implements PlanService {
 
-    private final static Integer QUANTITY_ELEMENT_ON_PAGE = 3;
+    private final static Integer QUANTITY_ELEMENT_ON_PAGE = 2;
 
     private final UserRepository userRepository;
     private final PlanRepository planRepository;
@@ -40,6 +40,8 @@ public class PlanServiceImpl implements PlanService {
     public List<PlanDTO> getAllByPage(String username, Integer page) {
         Pageable pageable = PageRequest.of(page, QUANTITY_ELEMENT_ON_PAGE);
 
+        log.debug("Get recipe list size = {}, page = {} by username = {} from database", QUANTITY_ELEMENT_ON_PAGE, page, username);
+
         List<PlanDTO> planList = planRepository.getAllByUsernameAndPageable(username, pageable);
 
         return planList;
@@ -49,6 +51,7 @@ public class PlanServiceImpl implements PlanService {
     public Integer getNumberPages(String username) {
         Integer countPlan = planRepository.countPlanByUserName(username);
         Integer page = (countPlan - 1) / QUANTITY_ELEMENT_ON_PAGE;
+        log.debug("Number recipe: {} Number page: {} for username: {}", countPlan, page, username);
         return (page > 0) ? page : 0;
     }
 }

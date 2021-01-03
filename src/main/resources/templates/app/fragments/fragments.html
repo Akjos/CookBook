@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
 </head>
@@ -34,7 +34,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" th:href="@{/app/schedules}">
+            <a class="nav-link" th:href="@{/app/plan}">
                 <span>Plany</span>
                 <i class="fas fa-angle-right"></i>
             </a>
@@ -56,6 +56,11 @@
                 <span>Użytkownicy To do for admin</span>
                 <i class="fas fa-angle-right"></i>
             </a>
+        </li>
+        <li class="nav-item ml-4" sec:authorize="isAuthenticated()">
+            <form th:action="@{/logout}" method="post">
+                <input class="input-group-text btn-color border-0 rounded-0" type="submit" value="Logout">
+            </form>
         </li>
     </ul>
 </div>

@@ -29,11 +29,13 @@
                             <h3 class="color-header text-uppercase">LISTA PLANÓW</h3>
                         </div>
                         <div class="col d-flex justify-content-end mb-2 noPadding">
-                            <a href="app-add-schedules.html" class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">Dodaj plan</a>
+                            <a th:href="@{/app/plan/add}" class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">Dodaj plan</a>
                         </div>
                     </div>
-
-                    <div class="schedules-content">
+                    <div th:if="${planList.isEmpty()}">
+                        <h2>Nie masz jeszcze żadnych planów</h2>
+                    </div>
+                    <div class="schedules-content" th:if="!${planList.isEmpty()}">
                         <table class="table border-bottom">
                             <thead>
                                 <tr class="d-flex">
@@ -56,6 +58,12 @@
 
                             </tbody>
                         </table>
+                        <div class="border-bottom dashboard-menu">
+                            <a class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4" th:if="${page}>1" th:href="@{/app/plan}"><--Pierwsza</a>
+                            <a class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4" th:if="${page}>0" th:href="@{/app/plan/{page} (page = ${page} - 1)}"><- Poprzednia</a>
+                            <a class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4" th:if="${maxPages}>${page}" th:href="@{/app/plan/{page} (page = ${page} + 1)}"> Następna -></a>
+                            <a class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4" th:if="${page + 1}<${maxPages}" th:href="@{/app/plan/{page} (page = ${maxPages})}"> Ostatnia --></a>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -55,9 +55,9 @@ public class RecipeServiceImpl implements RecipeService {
 
         log.debug("Get recipe list size = {}, page = {} by user id = {} from database", SIZE, page, userId);
 
-        List<RecipeListDTO> recipesDTO = recipeRepository.getRecipesByUserId(userId, pageable);
+        List<RecipeListDTO> recipesDTOList = recipeRepository.getRecipesByUserId(userId, pageable);
 
-        return recipesDTO;
+        return recipesDTOList;
     }
 
     @Override
