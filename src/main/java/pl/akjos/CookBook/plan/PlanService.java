@@ -4,7 +4,7 @@ import pl.akjos.CookBook.plan.dto.PlanToSaveDTO;
 
 public interface PlanService {
 
-    void add(PlanToSaveDTO planToSave);
+    void add(PlanToSaveDTO planToSave, String username);
 
 
 }
