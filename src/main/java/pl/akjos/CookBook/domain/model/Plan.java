@@ -32,8 +32,8 @@ public class Plan {
     @ManyToOne
     private User user;
 
-//    @PrePersist
-//    public void prePersist() {
-//        this.created = LocalDate.now();
-//    }
+    @PrePersist
+    public void prePersist() {
+        this.created = LocalDate.now();
+    }
 }
