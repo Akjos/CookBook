@@ -3,9 +3,11 @@ package pl.akjos.CookBook.setup;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.akjos.CookBook.domain.model.Plan;
 import pl.akjos.CookBook.domain.model.Recipe;
 import pl.akjos.CookBook.domain.model.Role;
 import pl.akjos.CookBook.domain.model.User;
+import pl.akjos.CookBook.domain.repositories.PlanRepository;
 import pl.akjos.CookBook.domain.repositories.RecipeRepository;
 import pl.akjos.CookBook.domain.repositories.RoleRepository;
 import pl.akjos.CookBook.domain.repositories.UserRepository;
@@ -25,11 +27,50 @@ public class StartingDataService {
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
     private final RecipeRepository recipeRepository;
+    private final PlanRepository planRepository;
 
     public void start() {
         setRoleInDB();
         setUserInDB();
         setRecipeInDB();
+        setPlanInDB();
+    }
+
+    private void setPlanInDB() {
+        List<Plan> planList = new ArrayList<>();
+
+        Plan plan1 = Plan.builder()
+                .name("Plan nr 1")
+                .description("Opis planu nr 1")
+                .user(userRepository.getUserByUsername(USER_LOGIN))
+                .build();
+        planList.add(plan1);
+
+
+        Plan plan2 = Plan.builder()
+                .name("Plan nr 2")
+                .description("Opis planu nr 2")
+                .user(userRepository.getUserByUsername(USER_LOGIN))
+                .build();
+        planList.add(plan2);
+
+
+        Plan plan3 = Plan.builder()
+                .name("Plan nr 3")
+                .description("Opis planu nr 3")
+                .user(userRepository.getUserByUsername(USER_LOGIN))
+                .build();
+        planList.add(plan3);
+
+
+        Plan plan4 = Plan.builder()
+                .name("Plan nr 4")
+                .description("Opis planu nr 4")
+                .user(userRepository.getUserByUsername(USER_LOGIN))
+                .build();
+        planList.add(plan4);
+
+        planRepository.saveAll(planList);
     }
 
     private void setRecipeInDB() {
